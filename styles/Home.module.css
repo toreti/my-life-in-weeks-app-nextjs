@@ -113,6 +113,32 @@
   margin-left: 0.5rem;
 }
 
+#container {
+  margin: 0 auto;
+  width: 624px;
+}
+
+#calendar {
+  position: relative;
+}
+
+#weeks {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.week {
+  background: white;
+  border: 1px solid black;
+  margin: 1px;
+  width: 10px;
+  height: 10px;
+}
+
+.week.lived {
+  background-color: black;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
