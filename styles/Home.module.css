@@ -109,7 +109,7 @@
 
 #container {
   margin: 0 auto;
-  width: 624px;
+  max-width: 624px;
 }
 
 #calendar {
