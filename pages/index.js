@@ -1,17 +1,31 @@
+import {useState} from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Calendar from '../src/components/Calendar'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
-  const calculateWeeksLived = function (birth) {
-    const today = new Date().getTime()
-    birth = new Date(birth).getTime()
-    return parseInt((today - birth) / (24 * 3600 * 1000 * 7))
+  const calculateWeeksLived = (date) => {
+    const todayDate = new Date().getTime()
+    const birthDate = new Date(date).getTime()
+    return parseInt((todayDate - birthDate) / (24 * 3600 * 1000 * 7))
   }
-  const lifeExpectancyInYears = 80
-  const birth = '1988-05-05'
-  const weeksLived = calculateWeeksLived(birth)
+
+  const handleBirthChange = (event) => {
+    setBirth(event.target.value)
+    setWeeksLived(calculateWeeksLived(birth))
+  }
+
+  const handleExpectancyChange = (event) => {
+    setLifeExpectancy(event.target.value)
+  }
+
+  const initialLifeExpectancy = 100
+  const initialBirth = '1988-05-05'
+  const [birth, setBirth] = useState(initialBirth)
+  const [weeksLived, setWeeksLived] = useState(calculateWeeksLived(initialBirth))
+  const [lifeExpectancy, setLifeExpectancy] = useState(initialLifeExpectancy)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -21,19 +35,31 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          My Life in Weeks
-        </h1>
-        <p className={styles.description}>
-          Birth
-          <code className={styles.code}>{birth}</code>
-          ~
-          Life expectancy
-          <code className={styles.code}>{lifeExpectancyInYears} years</code>
-        </p>
+        <h1 className={styles.title}>My Life in Weeks</h1>
+        <div>
+          <label>
+            Birth:
+            <input type="date" value={birth} onChange={handleBirthChange} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Life expectancy in years:
+            <input
+              type="number"
+              id={styles.expectancy}
+              value={lifeExpectancy}
+              onChange={handleExpectancyChange}
+            />
+          </label>
+        </div>
+        <br />
         <div id={styles.container}>
           <div id={styles.calendar}>
-            <Calendar lifeExpectancyInYears={lifeExpectancyInYears} weeksLived={weeksLived} />
+            <Calendar
+              lifeExpectancyInYears={lifeExpectancy}
+              weeksLived={weeksLived}
+            />
           </div>
         </div>
       </main>

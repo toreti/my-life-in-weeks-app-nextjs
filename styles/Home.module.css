@@ -112,6 +112,10 @@
   max-width: 624px;
 }
 
+#expectancy {
+  max-width: 50px;
+}
+
 #calendar {
   position: relative;
 }
