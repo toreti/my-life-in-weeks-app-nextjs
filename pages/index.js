@@ -5,20 +5,17 @@ import Calendar from '../src/components/Calendar'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
-  const calculateWeeksLived = (date) => {
-    const todayDate = new Date().getTime()
-    const birthDate = new Date(date).getTime()
-    return parseInt((todayDate - birthDate) / (24 * 3600 * 1000 * 7))
-  }
 
-  const handleBirthChange = (event) => {
+  const todayDate = new Date().getTime()
+
+  const calculateWeeksLived = birthDate => parseInt((todayDate - new Date(birthDate).getTime()) / (24 * 3600 * 1000 * 7))
+
+  const handleBirthChange = event => {
     setBirth(event.target.value)
     setWeeksLived(calculateWeeksLived(event.target.value))
   }
 
-  const handleExpectancyChange = (event) => {
-    setLifeExpectancy(event.target.value)
-  }
+  const handleExpectancyChange = event => setLifeExpectancy(event.target.value)
 
   const initialLifeExpectancy = 100
   const initialBirth = '1988-05-05'
