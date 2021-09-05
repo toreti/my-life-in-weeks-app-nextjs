@@ -13,7 +13,7 @@ export default function Home() {
 
   const handleBirthChange = (event) => {
     setBirth(event.target.value)
-    setWeeksLived(calculateWeeksLived(birth))
+    setWeeksLived(calculateWeeksLived(event.target.value))
   }
 
   const handleExpectancyChange = (event) => {
